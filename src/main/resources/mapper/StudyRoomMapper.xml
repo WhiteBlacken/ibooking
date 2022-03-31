@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.ibooking.mapper.StudyRoomMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.huawei.ibooking.pojo.StudyRoom">
+        <id column="id" property="id"/>
+        <result column="buildingNum" property="buildingNum"/>
+        <result column="classRoomNum" property="classRoomNum"/>
+        <result column="status" property="status"/>
+        <result column="beginDate" property="beginDate"/>
+        <result column="endDate" property="endDate"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,buildingNum,classRoomNum,status,beginDate,endDate
+    </sql>
+
+    <select id="getStudyRoomsByConditions" resultMap="BaseResultMap">
+        SELECT * from tbl_study_room as room
+        <where>
+            <if test="null!=condition.status and ''!=condition.status">
+                AND room.status = #{condition.status}
+            </if>
+            <if test="null!=condition.buildingNum and ''!=condition.buildingNum">
+                AND room.buildingNum = #{condition.buildingNum}
+            </if>
+            <if test="null!=condition.classRoomNum and ''!=condition.classRoomNum">
+                AND room.classRoomNum = #{condition.classRoomNum}
+            </if>
+            <if test="null!=condition.isValid and True = condition.isValid">
+                <if test="null!=condition.beginDate and null!=condition.endDate">
+                    AND room.beginDate &lt;= #{condition.beginDate}
+                    AND room.endDate &gt;= #{condition.endDate}
+                </if>
+            </if>
+        </where>
+
+    </select>
+</mapper>

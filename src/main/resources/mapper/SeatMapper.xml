@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.ibooking.mapper.SeatMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.huawei.ibooking.pojo.Seat">
+        <id column="id" property="id"/>
+        <result column="studyRoomId" property="studyRoomId"/>
+        <result column="status" property="status"/>
+        <result column="seatNum" property="seatNum"/>
+    </resultMap>
+
+    <resultMap id="SeatInfo" type="com.huawei.ibooking.pojo.Seat" extends="BaseResultMap">
+        <association property="studyRoom" javaType="com.huawei.ibooking.pojo.StudyRoom">
+            <id column="studyId" property="id"/>
+            <result column="buildingNum" property="buildingNum"/>
+            <result column="classRoomNum" property="classRoomNum"/>
+            <result column="studyStatus" property="status"/>
+            <result column="beginDate" property="beginDate"/>
+            <result column="endDate" property="endDate"/>
+        </association>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        ,stuRoomId,status,seatNum
+    </sql>
+
+    <select id="getAllSeatByPage" resultMap="SeatInfo">
+        SELECT seat.*,
+               room.id           as studyId,
+               room.buildingNum  as buildingNum,
+               room.classRoomNum as classRoomNum,
+               room.status       as studyStatus,
+               room.beginDate    as beginDate,
+               room.endDate      as endDate
+        FROM tbl_seat as seat
+                 INNER JOIN
+             tbl_study_room as room
+             ON
+                 seat.studyRoomId = room.id
+    </select>
+
+    <select id="getSeatsByConditions" resultMap="SeatInfo">
+        SELECT seat.*,
+        room.id as studyId,
+        room.buildingNum as buildingNum,
+        room.classRoomNum as classRoomNum,
+        room.status as studyStatus,
+        room.beginDate as beginDate,
+        room.endDate as endDate
+        FROM tbl_seat as seat
+        INNER JOIN
+        tbl_study_room as room
+        ON
+        seat.studyRoomId = room.id
+        <where>
+            <if test="null!=condition.seatNum">
+                AND seat.seatNum = #{condition.seatNum}
+            </if>
+            <if test="null!=condition.status and ''!=condition.status">
+                AND seat.status = #{condition.status}
+            </if>
+            <if test="null!=condition.studyRoomNum">
+                AND room.classRoomNum = #{condition.studyRoomNum}
+            </if>
+            <if test="null!=condition.seatNum">
+                AND room.buildingNum = #{condition.buildingNum}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
