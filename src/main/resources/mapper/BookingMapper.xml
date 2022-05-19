@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.ibooking.mapper.BookingMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.huawei.ibooking.pojo.Booking">
+        <id column="id" property="id"/>
+        <result column="seatId" property="seatId"/>
+        <result column="stuId" property="stuId"/>
+        <result column="type" property="type"/>
+        <result column="beginDate" property="beginDate"/>
+        <result column="endDate" property="endDate"/>
+    </resultMap>
+
+
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,seatId,stuId,type,beginDate,endDate
+    </sql>
+    
+<!--    getNumByStuAndTime-->
+<!--    getNumByStuAndTime-->
+    <select id="getNumBySeatAndTime" resultType="Integer">
+        SELECT count(*) FROM tbl_booking as booking
+        Where
+            booking.seatId = #{seatId}
+        AND
+            booking.beginDate &lt;= #{endDate}
+        AND
+            booking.endDate &gt;= #{beginDate}
+    </select>
+
+    <select id="getNumByStuAndTime" resultType="Integer">
+        SELECT count(*) FROM tbl_booking as booking
+        WHERE
+            booking.stuId = #{stuId}
+          AND
+            booking.beginDate &lt;= #{endDate}
+          AND
+            booking.endDate &gt;= #{beginDate}
+    </select>
+
+    <select id="getBookingsByStuId" resultType="com.huawei.ibooking.pojo.Booking">
+        SELECT * from tbl_booking as booking
+        WHERE booking.stuId = #{stuId}
+    </select>
+</mapper>

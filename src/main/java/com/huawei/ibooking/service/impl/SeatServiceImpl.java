@@ -44,8 +44,9 @@ public class SeatServiceImpl extends ServiceImpl<SeatMapper, Seat> implements Se
      */
     @Override
     public RespPageBean getSeatsByCondition(Integer page, Integer size, SeatCondition seatCondition) {
-        Page<Seat> seatPage = new Page<>(page,size);
+        IPage<Seat> seatPage = new Page<>(page,size);
         IPage<Seat> iPage = seatMapper.getSeatsByConditions(seatPage,seatCondition);
+        System.out.println("status:"+seatCondition.getStatus());
         return new RespPageBean(iPage.getRecords().size(),iPage.getRecords());
     }
 

@@ -35,10 +35,17 @@ public class Seat implements Serializable {
     @ApiModelProperty(value = "studyRoomId")
     private int studyRoomId;
 
-    @ApiModelProperty(value = "状态")
+    @ApiModelProperty(value = "状态 0-不可用 1-可用")
     private int status;
 
     @ApiModelProperty(value = "所属自习室")
     @TableField(exist = false)
     private StudyRoom studyRoom;
+
+    public Seat(int id, String seatNum, int studyRoomId, int status) {
+        this.id = id;
+        this.seatNum = seatNum;
+        this.studyRoomId = studyRoomId;
+        this.status = status;
+    }
 }

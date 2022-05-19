@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -19,6 +21,8 @@ import java.time.LocalDateTime;
 
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("tbl_study_room")
@@ -36,16 +40,14 @@ public class StudyRoom implements Serializable {
     @ApiModelProperty(value = "教室号")
     private String classRoomNum;
 
-    @ApiModelProperty(value = "当前状态")
+    @ApiModelProperty(value = "当前状态 0-不可用 1-可用")
     private int status;
 
     @ApiModelProperty(value = "开始时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Shanghai")
-    private LocalDateTime beginDate;
+    private int beginHour;
 
     @ApiModelProperty(value = "结束时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Shanghai")
-    private LocalDateTime endDate;
+    private int endHour;
 
 
 }

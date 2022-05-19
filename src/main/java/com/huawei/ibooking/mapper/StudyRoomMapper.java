@@ -22,5 +22,5 @@ public interface StudyRoomMapper extends BaseMapper<StudyRoom> {
      * @return
      */
     //在sql语句执行之前去获取，并改为分页查询的sql语句
-    IPage<StudyRoom> getStudyRoomsByConditions(Page<StudyRoom> page, @Param("condition") StudyRoomCondition condition);
+    IPage<StudyRoom> getStudyRoomsByConditions(IPage<StudyRoom> page, @Param("condition") StudyRoomCondition condition);
 }

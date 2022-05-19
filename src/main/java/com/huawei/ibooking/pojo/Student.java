@@ -29,4 +29,5 @@ public class Student implements Serializable {
 
     @ApiModelProperty(value = "密码")
     private String password;
+
 }
