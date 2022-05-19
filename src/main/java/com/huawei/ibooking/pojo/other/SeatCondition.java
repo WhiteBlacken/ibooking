@@ -20,6 +20,7 @@ public class SeatCondition {
     @ApiModelProperty("座位编号")
     private String seatNum;
 
+    //此处status：当room和seat都为1时才为1
     @ApiModelProperty(value = "状态")
     private int status;
 

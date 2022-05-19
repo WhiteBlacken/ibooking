@@ -16,15 +16,14 @@
             <result column="buildingNum" property="buildingNum"/>
             <result column="classRoomNum" property="classRoomNum"/>
             <result column="studyStatus" property="status"/>
-            <result column="beginDate" property="beginDate"/>
-            <result column="endDate" property="endDate"/>
+            <result column="beginHour" property="beginHour"/>
+            <result column="endHour" property="endHour"/>
         </association>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        ,stuRoomId,status,seatNum
+        id,stuRoomId,status,seatNum
     </sql>
 
     <select id="getAllSeatByPage" resultMap="SeatInfo">
@@ -33,8 +32,8 @@
                room.buildingNum  as buildingNum,
                room.classRoomNum as classRoomNum,
                room.status       as studyStatus,
-               room.beginDate    as beginDate,
-               room.endDate      as endDate
+               room.beginHour    as beginHour,
+               room.endHour      as endHour
         FROM tbl_seat as seat
                  INNER JOIN
              tbl_study_room as room
@@ -48,8 +47,8 @@
         room.buildingNum as buildingNum,
         room.classRoomNum as classRoomNum,
         room.status as studyStatus,
-        room.beginDate as beginDate,
-        room.endDate as endDate
+        room.beginHour as beginHour,
+        room.endHour as endHour
         FROM tbl_seat as seat
         INNER JOIN
         tbl_study_room as room
@@ -59,13 +58,13 @@
             <if test="null!=condition.seatNum">
                 AND seat.seatNum = #{condition.seatNum}
             </if>
-            <if test="null!=condition.status and ''!=condition.status">
-                AND seat.status = #{condition.status}
+            <if test="null!=condition.status" >
+                AND seat.status*seat.status =  #{condition.status}
             </if>
             <if test="null!=condition.studyRoomNum">
                 AND room.classRoomNum = #{condition.studyRoomNum}
             </if>
-            <if test="null!=condition.seatNum">
+            <if test="null!=condition.buildingNum">
                 AND room.buildingNum = #{condition.buildingNum}
             </if>
         </where>

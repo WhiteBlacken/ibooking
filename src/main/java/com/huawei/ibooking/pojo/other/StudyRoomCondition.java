@@ -29,15 +29,9 @@ public class StudyRoomCondition {
     @ApiModelProperty(value = "教室号")
     private String classRoomNum;
 
-    //只有可用时，选择时间才有意义
-    @ApiModelProperty(value = "是否可用")
-    private Boolean isValid = Boolean.FALSE;
-
     @ApiModelProperty(value = "开始时间")
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Shanghai")
-    private String beginDate;
+    private String beginHour;
 
     @ApiModelProperty(value = "结束时间")
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Shanghai")
-    private String endDate;
+    private String endHour;
 }

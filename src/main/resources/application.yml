@@ -21,6 +21,8 @@ mybatis-plus:
   type-aliases-package: com.haiwei.ibooking.pojo
   configuration:
     map-underscore-to-camel-case: false
+#    打印sql
+    log-impl:  org.apache.ibatis.logging.stdout.StdOutImpl
 
 logging:
   level:

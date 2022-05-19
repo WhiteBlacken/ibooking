@@ -8,13 +8,14 @@
         <result column="buildingNum" property="buildingNum"/>
         <result column="classRoomNum" property="classRoomNum"/>
         <result column="status" property="status"/>
-        <result column="beginDate" property="beginDate"/>
-        <result column="endDate" property="endDate"/>
+        <result column="beginHour" property="beginHour"/>
+        <result column="endHour" property="endHour"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id,buildingNum,classRoomNum,status,beginDate,endDate
+        id
+        ,buildingNum,classRoomNum,status,beginHour,endHour
     </sql>
 
     <select id="getStudyRoomsByConditions" resultMap="BaseResultMap">
@@ -29,12 +30,11 @@
             <if test="null!=condition.classRoomNum and ''!=condition.classRoomNum">
                 AND room.classRoomNum = #{condition.classRoomNum}
             </if>
-            <if test="null!=condition.isValid and True = condition.isValid">
-                <if test="null!=condition.beginDate and null!=condition.endDate">
-                    AND room.beginDate &lt;= #{condition.beginDate}
-                    AND room.endDate &gt;= #{condition.endDate}
-                </if>
+            <if test="null!=condition.beginHour and null!=condition.endHour">
+                AND room.beginHour &lt;= #{condition.beginHour}
+                AND room.endHour &gt;= #{condition.endHour}
             </if>
+
         </where>
 
     </select>

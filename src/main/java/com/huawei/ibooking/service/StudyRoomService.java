@@ -27,4 +27,6 @@ public interface StudyRoomService extends IService<StudyRoom> {
      * @return
      */
     RespPageBean getAllStudyRoom(Integer page, Integer size);
+
+    int getCntByBNumAndCNum(String buildingNum, String classRoomNum);
 }

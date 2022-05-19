@@ -15,6 +15,6 @@ import org.apache.ibatis.annotations.Param;
 public interface SeatMapper extends BaseMapper<Seat> {
     IPage<Seat> getAllSeatByPage(IPage<Seat> seatIPage);
 
-    IPage<Seat> getSeatsByConditions(Page<Seat> seatPage, @Param("condition") SeatCondition condition);
+    IPage<Seat> getSeatsByConditions(IPage<Seat> seatPage, @Param("condition") SeatCondition condition);
 
 }

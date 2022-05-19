@@ -1,6 +1,9 @@
 package com.huawei.ibooking.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.huawei.ibooking.mapper.StudyRoomMapper;
@@ -40,6 +43,19 @@ public class StudyRoomServiceImpl extends ServiceImpl<StudyRoomMapper, StudyRoom
     }
 
     /**
+     * 根据楼号和教室号查询教室
+     * @param buildingNum
+     * @param classRoomNum
+     * @return
+     */
+    @Override
+    public int getCntByBNumAndCNum(String buildingNum, String classRoomNum) {
+        QueryWrapper<StudyRoom> wrapper = new QueryWrapper<>();
+        wrapper.eq("buildingNum",buildingNum).eq("classRoomNum",classRoomNum);
+        return studyRoomMapper.selectCount(wrapper);
+    }
+
+    /**
      * 根据条件查询studyRoom（分页）
      * @param studyRoomCondition
      * @return
@@ -47,7 +63,7 @@ public class StudyRoomServiceImpl extends ServiceImpl<StudyRoomMapper, StudyRoom
     @Override
     public RespPageBean getStudyRoomsByConditions(Integer page,Integer size,StudyRoomCondition studyRoomCondition) {
         //开启分页
-        Page<StudyRoom> roomPage = new Page<>(page,size);
+        IPage<StudyRoom> roomPage = new Page<>(page,size);
         IPage<StudyRoom> iPage =  studyRoomMapper.getStudyRoomsByConditions(roomPage,studyRoomCondition);
         return new RespPageBean(iPage.getRecords().size(), iPage.getRecords());
     }

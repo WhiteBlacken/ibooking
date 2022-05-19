@@ -1,24 +1,13 @@
-package com.huawei.ibooking.test.defs;
+package com.huawei.ibooking.test.seat.defs;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.huawei.ibooking.pojo.Seat;
-import com.huawei.ibooking.pojo.StudyRoom;
-import com.huawei.ibooking.pojo.other.RespPageBean;
-import com.huawei.ibooking.pojo.other.SeatCondition;
-import com.huawei.ibooking.service.SeatService;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 
 /**
